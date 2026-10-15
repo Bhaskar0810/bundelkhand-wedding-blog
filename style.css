@@ -841,9 +841,8 @@ body.twilight-mode .wiki-toc-sublist a {
 .responsive-img {
   width: 100%;
   height: auto;
-  max-height: 520px;
-  object-fit: cover;
   display: block;
+  object-fit: contain;
 }
 
 .photo-caption {
