@@ -304,51 +304,5 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // 7. Interactive Device Photo Loader & Storage
-  const photoInputs = document.querySelectorAll('.photo-file-input');
-  photoInputs.forEach((input) => {
-    const targetId = input.getAttribute('data-target');
-    const storageKey = input.getAttribute('data-storage');
-    const imgEl = targetId ? document.getElementById(targetId) : null;
-
-    // Load saved image from browser storage if present
-    if (storageKey && imgEl) {
-      try {
-        const savedData = localStorage.getItem(storageKey);
-        if (savedData) {
-          imgEl.src = savedData;
-          imgEl.style.display = 'block';
-          if (imgEl.parentElement) {
-            imgEl.parentElement.classList.remove('img-fallback');
-          }
-        }
-      } catch (e) {
-        // Ignore storage access errors
-      }
-    }
-
-    // When user selects their photograph file
-    input.addEventListener('change', (e) => {
-      const file = e.target.files && e.target.files[0];
-      if (file && imgEl && storageKey) {
-        const reader = new FileReader();
-        reader.onload = (loadEvent) => {
-          const result = loadEvent.target.result;
-          imgEl.src = result;
-          imgEl.style.display = 'block';
-          if (imgEl.parentElement) {
-            imgEl.parentElement.classList.remove('img-fallback');
-          }
-          try {
-            localStorage.setItem(storageKey, result);
-          } catch (storageErr) {
-            console.warn('Photo loaded in preview. (Local quota exceeded for long-term storage).');
-          }
-        };
-        reader.readAsDataURL(file);
-      }
-    });
-  });
-
   console.log('Bandhan & Baaraat: Seamless Long-form Blog Loaded.');
 });
